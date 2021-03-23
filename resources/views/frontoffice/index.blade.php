@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', "Kaamelot'Tse")
+@section('title', "ENST'Atlantide")
 
 @section('content')
     <div class="row carre carousel slide" id="diaporama">
