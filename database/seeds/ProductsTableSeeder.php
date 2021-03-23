@@ -40,9 +40,16 @@ class ProductsTableSeeder extends Seeder
                 'available' => true,
                 'price' => 2.6,
                 'points' => 25
-            ]
+            ],
+            [
+                'name' => 'Allo service',
+                'description' => 'Besoin d\aide ? Appelez nous et on arrive illico !',
+                'image' => 'https://youarevintage.fr/wp-content/uploads/2019/06/Canard-1-min-1980x1320.jpg',
+                'priority' => '105',
+                'available' => true,
+                'price' => 2.5,
+                'points' => 20
+            ],
         ]);
-
-        Product::factory()->count(10)->create();
     }
 }
