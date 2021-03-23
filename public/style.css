@@ -6,7 +6,9 @@
     Or: #A7905A
 */
 body{
-    background: url('images/rideau.png') repeat;
+    background: url('images/plongee-grotte-the-pit-yucatan-mexique-heinerth.webp') no-repeat center ;
+	background-size: cover;
+	background-position: center;
 }
 @media (min-width: 1200px) {
     .container.page{
@@ -17,9 +19,12 @@ body{
     margin-bottom: 10px;
 }
 .carre{
-    background: url('images/parchemin2.png') repeat;
+    /*background: url('images/parchemin2.png') repeat;*/
+	background-color: #160B66;
     border-radius: 0;
+	border: solid black 2px;
     padding: 8px;
+	color: #A9A7A2;
 }
 .carre>h1{
     text-align: center;
@@ -39,7 +44,7 @@ q{
     background: url('images/fur1.png') repeat;
 }
 .navbar a{
-    color: #A7905A;    
+    color: #19A1C3;    
 }
 .navbar-brand{
     margin: 0;
@@ -58,7 +63,7 @@ q{
     margin-bottom: 8px;
 }
 .carre.card a{
-    color: #692415;
+    color: #669997;
 }
 .table_ronde .card .perso{
     /*height: 182px;*/
