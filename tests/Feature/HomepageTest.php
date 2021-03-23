@@ -14,11 +14,6 @@ class HomepageTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_it_shows_articles_on_homepage()
     {
         Quote::factory()
@@ -32,10 +27,19 @@ class HomepageTest extends TestCase
 
         $response = $this->get('/');
 
+
+        $response->assertOk();
         $articles->each(
             function (Article $article) use ($response) {
                 $response->assertSee($article->title);
             }
         );
+    }
+
+    public function test_it_works_without_quotes()
+    {
+        $response = $this->get('/');
+
+        $response->assertOk();
     }
 }
