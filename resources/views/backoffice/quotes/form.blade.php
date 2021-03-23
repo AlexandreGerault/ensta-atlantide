@@ -47,8 +47,8 @@
                     <a href="{{ url()->previous() }}" class="btn btn-secondary">
                         Retour
                     </a>
-                    @if(isset($quote))
-                        <a class="btn btn-danger" href="{{ route('backoffice.quote.destroy', $quote) }}"
+                    @if(isset($quote->id) && $quote->id)
+                        <a class="btn btn-danger" href="{{ route('backoffice.quote.destroy', ['quote' => $quote->id]) }}"
                            onclick="event.preventDefault();
                        document.getElementById('destroy-form').submit();">
                             Supprimer
@@ -56,8 +56,8 @@
                     @endif
                 </div>
             </form>
-            @if(isset($quote))
-                <form id="destroy-form" action="{{ route('backoffice.quote.destroy', $quote) }}" method="POST"
+            @if(isset($quote->id) && $quote->id)
+                <form id="destroy-form" action="{{ route('backoffice.quote.destroy', ['quote' => $quote->id]) }}" method="POST"
                       style="display: none;">
                     @method('DELETE')
                     @csrf

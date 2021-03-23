@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use Eloquent;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
@@ -52,32 +53,42 @@ use Illuminate\Support\Carbon;
  */
 class Article extends Model
 {
-	use SoftDeletes;
+    use SoftDeletes, HasFactory;
 
-	protected $fillable =[
-        'title', 'subtitle', 'image', 'content', 'priority', 'published', 'slug', 'link', 'author_id'
+    protected $fillable = [
+        'title',
+        'subtitle',
+        'image',
+        'content',
+        'priority',
+        'published',
+        'slug',
+        'link',
+        'author_id'
     ];
 
-	//Defauls values
-	protected $attributes = [
+    //Defauls values
+    protected $attributes = [
         'priority' => 0,
     ];
 
-	/**
+    /**
      * Obtenir l'utilisateur qui a créé l'article
+     * @return BelongsTo<User>
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class,'author_id', 'id');
+        return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
     /**
-     * Only get visibled articles
+     * Only get published articles
      *
      * @param Builder $query
+     *
      * @return Builder
      */
-    public function scopePublished(Builder $query)
+    public function scopePublished(Builder $query): Builder
     {
         return $query->where('published', 1);
     }
