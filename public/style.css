@@ -19,7 +19,7 @@ body{
     margin-bottom: 10px;
 }
 .carre{
-    #background: url('images/parchemin2.png') repeat;
+    /*background: url('images/parchemin2.png') repeat;*/
 	background-color: #160B66;
     border-radius: 0;
 	border: solid black 2px;
