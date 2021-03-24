@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/tableRonde', [IndexController::class, 'tableRonde'])->name('round-table');
 
-Route::get('/tableau-de-bord', [DashboardController::class, 'index'])
+Route::get('/tableau-de-bord', DashboardController::class)
     ->name('dashboard')
     ->middleware('auth');
 

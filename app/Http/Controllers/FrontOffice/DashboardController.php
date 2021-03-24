@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\FrontOffice;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Order;
@@ -16,15 +17,24 @@ class DashboardController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return Renderable
+     * @return View
+     * @throws BindingResolutionException
      */
-    public function index()
+    public function __invoke(): View
     {
-		$products = Product::where([['available', 1],['stock', '>', 0]])->orderBy('priority')->limit(3)->get();
-		$orders = Order::where('customer_id', Auth::id())->orderBy('updated_at')->get();
+        /**
+         * @var User $authUser
+         */
+        $authUser = Auth::user();
 
-        $article_bienvenue = Article::where('title', 'texte_bienvenue')->first();
+        $products = Product::query()->available()->inStock()->orderBy('priority')->limit(3)->get();
+        $orders   = Order::query()->byCustomer($authUser)->orderBy('updated_at')->get();
 
-        return view('frontoffice.dashboard', ['products' => $products, 'orders' => $orders, 'article_bienvenue' => $article_bienvenue]);
+        $articleBienvenue = Article::query()->where('title', 'texte_bienvenue')->firstOrFail();
+
+        return view()->make(
+            'frontoffice.dashboard',
+            ['products' => $products, 'orders' => $orders, 'articleBienvenue' => $articleBienvenue]
+        );
     }
 }
