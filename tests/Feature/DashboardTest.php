@@ -52,11 +52,14 @@ class DashboardTest extends TestCase
 
     public function test_a_user_can_see_its_orders()
     {
-        $this->setupUserWithOrdersAndArticle();
+        $user = $this->setupUserWithOrdersAndArticle();
 
         $response = $this->get(route('dashboard'));
 
         $response->assertOk();
+        $user->orders()->each(function (Order $order) use ($response) {
+            $response->assertSee('Commande du ' . $order->created_at);
+        });
     }
 
     public function test_a_user_can_see_its_fidelity_points()
