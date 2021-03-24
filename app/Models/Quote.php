@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -31,6 +32,8 @@ use Illuminate\Support\Carbon;
  */
 class Quote extends Model
 {
+    use HasFactory;
+
 	protected $fillable = [
         'content', 'author'
     ];
