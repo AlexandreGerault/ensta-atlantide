@@ -28,14 +28,6 @@ class MessagesController extends Controller
         });
     }
 
-    public $categories_messages = [
-        1 => "Event",
-        2 => "Commande",
-        3 => "Martins Marteau",
-        4 => "Site",
-        5 => "Confidencialité"
-    ];
-
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +42,7 @@ class MessagesController extends Controller
 
         return view('backoffice.messages.index', [
             'messages' => $messages,
-            'categories_messages' => $this->categories_messages
+            'categories_messages' => Message::CATEGORIES
         ]);
     }
 
