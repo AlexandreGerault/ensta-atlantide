@@ -45,9 +45,9 @@
                                 Aucune commande n'a encore été trouvée
                             </div>
                         @endif
-                        @if(isset($article_bienvenue->content))
+                        @if(isset($articleBienvenue->content))
                             <div class="carre my-3">
-                                {{ $article_bienvenue->content }}
+                                {{ $articleBienvenue->content }}
                             </div>
                         @endif
                         @foreach($orders as $order)
