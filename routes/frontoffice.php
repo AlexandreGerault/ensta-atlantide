@@ -27,5 +27,5 @@ Route::get('/tableau-de-bord', [DashboardController::class, 'index'])
 
 Route::resource('order', OrderController::class);
 Route::post('order/{order}/sendMessage', [OrderController::class, 'sendMessage'])->name('frontoffice.order.message');
-Route::resource('message', MessagesController::class);
+Route::resource('message', MessagesController::class)->except(['create', 'edit', 'update']);
 Route::resource('produits', ProductController::class);

@@ -15,7 +15,7 @@
                             <th>Sujet</th>
                             <th>Catégorie</th>
                             <th>Message</th>
-                            <th>Depuis</th>
+                            <th>Le</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -23,9 +23,9 @@
                         @foreach ($messages as $message)
                             <tr>
                                 <td>{{ $message->id }}</td>
-                                <td class="text-primary"><a href="{{ route('message.edit', $message) }}">
-                                        <strong>{{ $message->subject }}</strong>
-                                    </a></td>
+                                <td class="text-primary">
+                                    <strong>{{ $message->subject }}</strong>
+                                </td>
                                 <td>{{ $categories_messages[$message->category] }}</td>
                                 <td>{{ $message->content }}</td>
                                 <td>

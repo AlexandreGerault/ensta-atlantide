@@ -22,7 +22,6 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
         Message::class => MessagePolicy::class,
         Product::class => ProductPolicy::class,
         Order::class => OrderPolicy::class,
@@ -53,8 +52,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('deliver', function (User $user) {
             return $user->hasPermission('deliver');
         });
-
-
-        //
     }
 }
