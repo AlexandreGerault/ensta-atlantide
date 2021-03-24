@@ -100,12 +100,13 @@ class User extends Authenticatable
         return $query->whereDoesntHave(
             'orders',
             function (Builder $query) {
-                return $query->whereIn('status',
-                                       [
-                                           config('ordering.status.NOT_COMPLETED'),
-                                           config('ordering.status.PENDING'),
-                                           config('ordering.status.IN_DELIVERY')
-                                       ]
+                return $query->whereIn(
+                    'status',
+                    [
+                        config('ordering.status.NOT_COMPLETED'),
+                        config('ordering.status.PENDING'),
+                        config('ordering.status.IN_DELIVERY')
+                    ]
                 );
             }
         );
