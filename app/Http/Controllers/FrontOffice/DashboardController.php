@@ -11,7 +11,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Article;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Show the application dashboard.

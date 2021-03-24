@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\Role;
 use Auth;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\MessageRequest;
@@ -15,26 +17,26 @@ use App\Models\Message;
 
 class IndexController extends Controller
 {
-    public $categories_messages = [
-        1 => "Une demande d'information sur un évènement",
-        2 => "Une demande concernant une commande / un service",
-        3 => "Les paroles de Martins Marteau",
-        4 => "Un problème technique avec le site",
-        5 => "Une demande de confidenctalité"
-    ];
-
-    public function index()
+    /**
+     * @return View
+     * @throws BindingResolutionException
+     */
+    public function index(): View
     {
         $articles = Article::published()
             ->orderBy('priority', 'desc')
             ->orderBy('updated_at', 'desc')
             ->paginate(config('paginate.frontoffice.articles.index'));
 
-        return view('frontoffice.index')->with('articles', $articles);
+        return view()->make('frontoffice.index')->with('articles', $articles);
     }
 
-    public function tableRonde()
+    /**
+     * @return View
+     * @throws BindingResolutionException
+     */
+    public function tableRonde(): View
     {
-        return view('frontoffice.table_ronde');
+        return view()->make('frontoffice.table_ronde');
     }
 }
