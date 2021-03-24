@@ -27,14 +27,24 @@ class DashboardController extends Controller
          */
         $authUser = Auth::user();
 
+        $points   = $authUser->totalPoints();
         $products = Product::query()->available()->inStock()->orderBy('priority')->limit(3)->get();
-        $orders   = Order::query()->byCustomer($authUser)->orderBy('updated_at')->get();
+        $orders   = Order::query()
+                         ->byCustomer($authUser)
+                         ->orderBy('updated_at')
+                         ->with('items.product')
+                         ->get();
 
         $articleBienvenue = Article::query()->where('title', 'texte_bienvenue')->firstOrFail();
 
         return view()->make(
             'frontoffice.dashboard',
-            ['products' => $products, 'orders' => $orders, 'articleBienvenue' => $articleBienvenue]
+            [
+                'products' => $products,
+                'orders' => $orders,
+                'articleBienvenue' => $articleBienvenue,
+                'points' => $points
+            ]
         );
     }
 }

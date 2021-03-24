@@ -72,7 +72,7 @@ class Order extends Model
     public function scopeByCustomer(Builder $query, User $user): Builder
     {
         return $query->whereHas(
-            'deliveryDriver',
+            'customer',
             function (Builder $query) use ($user) {
                 return $query->where('customer_id', $user->id);
             }
