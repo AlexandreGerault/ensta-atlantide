@@ -33,15 +33,6 @@ class IndexController extends Controller
         return view('frontoffice.index')->with('articles', $articles);
     }
 
-    public function get_contact()
-    {
-        return view('frontoffice.contact', ['categories_messages' => $this->categories_messages]);
-    }
-
-    public function post_contact(MessageRequest $request)
-    {
-    }
-
     public function tableRonde()
     {
         return view('frontoffice.table_ronde');
