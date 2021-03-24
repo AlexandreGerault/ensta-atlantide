@@ -12,13 +12,16 @@ class MessagePolicy
 
     public function before(User $user, $ability)
     {
-        return $user->hasPermission('message') || $user->hasRole('administrateur');
+        if ($user->hasPermission('message') || $user->hasRole('administrateur')) {
+            return true;
+        }
     }
 
     /**
      * Determine whether the user can view any messages.
      *
      * @param User $user
+     *
      * @return mixed
      */
     public function viewAny(User $user)
@@ -31,17 +34,19 @@ class MessagePolicy
      *
      * @param User $user
      * @param Message $message
+     *
      * @return mixed
      */
     public function view(User $user, Message $message)
     {
-        return $user->hasPermission('message.view');
+        return $user->hasPermission('message.view') || $user->messages->contains($message);
     }
 
     /**
      * Determine whether the user can create messages.
      *
      * @param User $user
+     *
      * @return mixed
      */
     public function create(User $user)
@@ -54,6 +59,7 @@ class MessagePolicy
      *
      * @param User $user
      * @param Message $message
+     *
      * @return mixed
      */
     public function update(User $user, Message $message)
@@ -66,6 +72,7 @@ class MessagePolicy
      *
      * @param User $user
      * @param Message $message
+     *
      * @return mixed
      */
     public function delete(User $user, Message $message)
@@ -78,6 +85,7 @@ class MessagePolicy
      *
      * @param User $user
      * @param Message $message
+     *
      * @return mixed
      */
     public function restore(User $user, Message $message)
@@ -90,6 +98,7 @@ class MessagePolicy
      *
      * @param User $user
      * @param Message $message
+     *
      * @return mixed
      */
     public function forceDelete(User $user, Message $message)

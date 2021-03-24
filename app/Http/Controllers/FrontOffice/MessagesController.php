@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageRequest;
 use App\Mail\ContactConfirmation;
 use App\Models\Message;
+use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -14,14 +16,6 @@ use Illuminate\Support\Facades\Mail;
 
 class MessagesController extends Controller
 {
-    public $categories_messages = [
-        1 => "Event",
-        2 => "Commande",
-        3 => "Martins Marteau",
-        4 => "Site",
-        5 => "Confidentialité"
-    ];
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -35,11 +29,15 @@ class MessagesController extends Controller
      */
     public function index(): View
     {
-        $messages = Auth::user()->messages;
+        /**
+         * @var User $user
+         */
+        $user = Auth::user();
+        $messages = $user->messages;
 
         return view()->make('frontoffice.messages.index', [
             'messages' => $messages,
-            'categories_messages' => $this->categories_messages
+            'categories_messages' => Message::CATEGORIES
         ]);
     }
 
@@ -70,9 +68,11 @@ class MessagesController extends Controller
      *
      * @return View
      * @throws BindingResolutionException
+     * @throws AuthorizationException
      */
     public function show(Message $message): View
     {
+        $this->authorize('view', $message);
         return view()->make('frontoffice.messages.show')->with('message', $message);
     }
 }
