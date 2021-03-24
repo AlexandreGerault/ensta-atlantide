@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/index', [IndexController::class, 'index'])->name('home');
-Route::get('/contact', [IndexController::class, 'get_contact']);
-Route::post('/contact', [IndexController::class, 'post_contact']);
 Route::get('/tableRonde', [IndexController::class, 'tableRonde'])->name('round-table');
 
 Route::get('/tableau-de-bord', [HomeController::class, 'index'])->name('dashboard')->middleware('auth');
